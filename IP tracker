@@ -1,0 +1,25 @@
+ip tracker by sending like
+pip install Flask requests
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return '''
+        <form action="/track" method="POST">
+            <input type="text" name="url" placeholder="Enter a URL">
+            <button type="submit">Track IP</button>
+        </form>
+    '''
+
+@app.route('/track', methods=['POST'])
+def track():
+    url = request.form['url']
+    ip = request.remote_addr
+    return f'The IP address of {url} is: {ip}'
+
+if __name__ == '__main__':
+    app.run(debug=True)
+for running use following command
+python ip_tracker.py
